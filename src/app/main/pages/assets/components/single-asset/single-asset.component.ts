@@ -9,6 +9,7 @@ import { AssetsService } from 'src/app/core/services/assets.service';
 })
 export class SingleAssetComponent implements OnInit {
   assetId:any
+  asset:any
   constructor(
     private route: ActivatedRoute,
     private assetService:AssetsService
@@ -20,6 +21,7 @@ export class SingleAssetComponent implements OnInit {
       console.log(this.assetId)
       this.assetService.geAssetById(this.assetId).subscribe(data=>{
         console.log(data)
+        this.asset = data
       })
 
     })

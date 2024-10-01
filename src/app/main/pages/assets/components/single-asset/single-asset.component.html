@@ -1,1 +1,38 @@
-<p>single-asset works!</p>
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3>{{ asset.name }}</h3>
+        <p class="text-muted">{{ asset.assetType }} - {{ asset.status }}</p>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Asset Details</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Address:</strong> {{ asset.address }}</li>
+          <li class="list-group-item"><strong>Acquisition Date:</strong> {{ asset.acquisitionDate | date: 'longDate' }}</li>
+          <li class="list-group-item"><strong>Area:</strong> {{ asset.areaSqm }} sqm</li>
+          <li class="list-group-item"><strong>Value:</strong> ${{ asset.value | number }}</li>
+          <li class="list-group-item"><strong>Rental Income:</strong> ${{ asset.rentalIncome | number }}/month</li>
+          <li class="list-group-item"><strong>Description:</strong> {{ asset.description }}</li>
+        </ul>
+        <h5 class="card-title mt-4">Owner Information</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Owner ID:</strong> {{ asset.owner.id }}</li>
+          <li class="list-group-item"><strong>Owner Name:</strong> {{ asset.owner.name }}</li>
+        </ul>
+      </div>
+      <div class="card-footer text-muted text-center">
+        <small>Last updated: {{ asset.updatedAt | date: 'short' }}</small>
+      </div>
+    </div>
+    
+    <div class="mt-4">
+      <h5>Events</h5>
+      <ul class="list-group">
+        <li *ngFor="let event of asset.events" class="list-group-item">
+          <strong>{{ event.eventType }}</strong>: {{ event.description }}
+          <small class="text-muted d-block">Event Date: {{ event.createdAt | date: 'short' }}</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
