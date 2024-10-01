@@ -1,21 +1,33 @@
-<p>login works!</p>
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4" style="width: 22rem;">
-      <div class="card-body">
-        <h5 class="card-title text-center mb-4">Login</h5>
-        <form [formGroup]="credentials">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email" required>
+  <div class="card p-4 shadow" style="width: 22rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-4">Login</h5>
+      
+      <form [formGroup]="credentials" (ngSubmit)="login()">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email" required>
+          <div *ngIf="credentials.get('email')?.invalid && credentials.get('email')?.touched" class="text-danger mt-1">
+            Please enter a valid email.
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" required>
+          <div *ngIf="credentials.get('password')?.invalid && credentials.get('password')?.touched" class="text-danger mt-1">
+            Password is required.
           </div>
-          
-          <button (click)="login()" class="btn btn-primary w-100">Login</button>
-        </form>
-      </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100" [disabled]="credentials.invalid || loader">
+          <span *ngIf="loader" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          Login
+        </button>
+      </form>
+      
+    </div>
+    <div class="text-center mt-3">
       <a routerLink="/auth/register">Register</a>
     </div>
   </div>
+</div>

@@ -16,13 +16,13 @@ export class LoginComponent implements OnInit {
   credentials!: FormGroup ;
   $loggerSubscribe:Subscription | undefined;
   $attemptAuth:Subscription | undefined;
-
+  loader= false
   constructor(private router:Router,
     private fb: FormBuilder,
     private userServices:UsersService,
     private alert:AlertService) {
       this.credentials = this.fb.group({
-        email: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]],
     })
   }
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-   // this.loader = true
+    this.loader = true
    console.log(this.credentials.value)
      this.$loggerSubscribe = this.userServices.logger(this.credentials.value).subscribe(
        {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
                        } else {
                          this.alert.errorTimer("error")
                        }
-                      // this.loader = false
+                       this.loader = false
                      },
                    },
                  )  
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
             this.alert.errorTimer("Error Auth")
           },
           complete: () => {
-           // this.loader = false
+            this.loader = false
           },
         },
       )

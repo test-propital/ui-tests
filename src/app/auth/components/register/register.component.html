@@ -1,29 +1,41 @@
-<p>register works!</p>
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4" style="width: 25rem;">
-      <div class="card-body">
-        <h5 class="card-title text-center mb-4">Register</h5>
-        <form>
-          <div class="mb-3">
-            <label for="fullName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+  <div class="card p-4" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-4">Register</h5>
+      <form [formGroup]="credentials" (ngSubmit)="register()">
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input formControlName="name" type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter password" required>
+          <div *ngIf="credentials.get('password')?.touched && credentials.get('password')?.invalid" class="text-danger">
+            <small *ngIf="credentials.get('password')?.hasError('required')">Password is required.</small>
+            <small *ngIf="credentials.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</small>
+            <small *ngIf="credentials.get('password')?.hasError('pattern')">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+          <div *ngIf="credentials.hasError('passwordMismatch') && credentials.get('confirmPassword')?.touched" class="text-danger">
+            Passwords must match.
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
-          </div>
-          <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-          </div>
-          
-          <button type="submit" class="btn btn-primary w-100">Register</button>
-        </form>
-      </div>
-      <a routerLink="/auth/Login">Login</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="credentials.invalid">Register</button>
+      </form>
+    </div>
+    <div class="text-center mt-3">
+      <a routerLink="/auth/Login">Already have an account? Login</a>
     </div>
   </div>
+</div>
