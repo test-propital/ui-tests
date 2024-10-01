@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
     console.log(body)
     this.assetService.generateRandomAsset(body).subscribe(data=>{
       console.log(data)
+      this.getAssetsCount()
     }, error => {
       console.error('Error post asset:', error);
     });
