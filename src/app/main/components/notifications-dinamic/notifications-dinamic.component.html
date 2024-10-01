@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <h3>Notifications</h3>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        New comment on your post
+        <span class="badge bg-primary rounded-pill">2 min ago</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        You have a new follower
+        <span class="badge bg-primary rounded-pill">10 min ago</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Password change successful
+        <span class="badge bg-primary rounded-pill">1 hour ago</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        New message from John Doe
+        <span class="badge bg-primary rounded-pill">3 hours ago</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Update available for your app
+        <span class="badge bg-primary rounded-pill">Yesterday</span>
+      </li>
+    </ul>
+    <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+            <a (click)="close()" class="nav-link active" aria-current="page"  routerLink="/main/notifications">show all Notifications</a>
+        </li>
+    </ul>
+
+  </div>
